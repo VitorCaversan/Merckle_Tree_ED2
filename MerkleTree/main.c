@@ -5,7 +5,7 @@ int size = 0; // how many nodes there are in the hash tree
 
 void saveData(Node** arrayTree);// Saves all data in a txt file
 void saveDataAux(Node* tree, FILE* arq);// Used for recursively runing the tree and saving it's components
-void recoverData(Node** arrayTree);// Recovers data from the file, puts it in a new tree an returns it
+void recoverData(Node** arrayTree);// Recovers data from the file and puts it in the tree
 
 int main()
 {
@@ -103,22 +103,10 @@ void recoverData(Node** arrayTree)
 
     if (arq != NULL)
     {
-        int linhas = 0;
-        while (!feof(arq)) {
-            char c;
-            fscanf(arq, "%c", &c);
-            if (c == '\n') {
-            linhas++;
-            }
-        }
-        rewind(arq);
-        linhas--;
-        linhas = linhas/2; // later the fscanf will be called twice for each round
-
         int aux1;
         int aux2;
         int i = 0;
-        for (i=0 ; i<linhas ; i++) 
+        while (!feof(arq)) 
         {
             fscanf(arq, "%d", &aux1);    
             fscanf(arq, "%d", &aux2);

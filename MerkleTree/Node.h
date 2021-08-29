@@ -14,6 +14,8 @@ typedef struct node
 to the every given key */
 int hashcode(int key, int maximumCapacity);
 
+
+/* Used for adding a value together with a key int the Hash Tree*/
 void add(int key, int value, int maximumCapacity, Node** indexTree, int* size);
 
 /*
@@ -37,7 +39,7 @@ void display_tree(Node *tree);
 /* for initializing the hash Tree */
 void init(Node** indexTree, int maximumCapacity);
 
-/* to del a key from hash Tree */
+/* deletes a key from hash Tree */
 void del(int key, Node** indexTree, int maximumCapacity, int* size);
 
 Node* remove_element(Node *tree, int key, int* size);

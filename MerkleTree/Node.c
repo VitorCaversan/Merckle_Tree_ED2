@@ -96,8 +96,7 @@ void display(Node** indexTree, int maximumCapacity)
     }
 }
 
-/* displays content of binary tree of
-particular index */
+/* displays content of binary tree of particular index */
 void display_tree(Node *tree)
 {
     if (tree == NULL)
@@ -120,7 +119,7 @@ void init(Node** indexTree, int maximumCapacity)
     }
 }
 
-/* to del a key from hash Tree */
+/* to delete a key from hash Tree */
 void del(int key, Node** indexTree, int maximumCapacity, int* size)
 {
     int index = hashcode(key, maximumCapacity);
@@ -135,12 +134,20 @@ void del(int key, Node** indexTree, int maximumCapacity, int* size)
             printf("key %d not present\n", key);
         else
         {
-            treeAux = remove_element(treeAux, key, size);
+            if (temp == indexTree[index])// if the node to be deleted is part of the main array, it cannot be freed
+            {
+                (*size)--;
+                indexTree[index] = NULL;
+            }
+            else
+                indexTree[index] = remove_element(indexTree[index], key, size);
+
             printf("%d has been removed from hash tree", key);
         }
     }
 }
 
+/* The function that actualy removes the element */ 
 Node* remove_element(Node *tree, int key, int* size)
 {
     if (tree == NULL)
@@ -178,9 +185,11 @@ Node* remove_element(Node *tree, int key, int* size)
                 Node *temp = tree->left;
                 while (temp->right != NULL)
                     temp = temp->right;
+                int i = tree->value;
                 tree->key = temp->key;
                 tree->value = temp->value;
                 temp->key = key;
+                temp->value = i;
                 tree->left = remove_element (tree->left, key, size);
             }
         }
